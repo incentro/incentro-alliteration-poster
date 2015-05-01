@@ -1,11 +1,18 @@
 var rivets = require('rivets');
+var objectData = require('../data/objects');
+
+require('../binder/backgroundImage');
 
 class CreatorLayoutView {
     constructor(element) {
         this.data = {
             playWord: 'plee',
             workWord: 'wurk',
-            posterImage: 'http://www.placekitten.com/300/320'
+            objects: objectData,
+            activeObject: {},
+            onPosterSelect : function(event, data){
+                this.data.activeObject = data.object;
+            }.bind(this)
         };
 
         this.element = element;

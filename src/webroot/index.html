@@ -11,8 +11,8 @@
             <fieldset class="posterSettings">
                 <label for="posterSettings_workWord" class="posterSettings_label">object</label>
                 <ul class="posterSettings_objectPicker">
-                    <li class="posterSettings_objectItem">
-                        <button type="button" class="posterSettings_object"></button>
+                    <li class="posterSettings_objectItem" rv-each-object="objects">
+                        <button type="button" class="posterSettings_object" rv-on-click="onPosterSelect" rv-background-image="object.imagePath.thumbnail">{object.id}</button>
                     </li>
                 </ul>
 
@@ -30,6 +30,7 @@
         <article class="creatorLayout_preview">
             {workWord}
             {playWord}
+            {activeObject.id}
         </article>
     </main>
     <script src="asset/javascript/site.js"></script>

@@ -5,6 +5,7 @@ var reload = browserSync.reload;
 var through2 = require('through2');
 var browserify = require('browserify');
 var rimraf = require('rimraf');
+var lwip = require('lwip');
 
 
 gulp.task('build',[
@@ -41,6 +42,7 @@ gulp.task('build:asset:javascript', function(){
         .pipe(through2.obj(function (file, enc, next){
             browserify(file.path)
                 .transform('debowerify')
+                .transform('brfs')
                 .transform('babelify')
                 .bundle(function(err, res){
                     file.contents = res;
@@ -62,9 +64,83 @@ gulp.task('build:asset:scss', function(){
     }).pipe(gulp.dest('./build/asset/css'));
 });
 
+var createLwipStream = function(processFn){
+    return through2.obj(function (file, enc, next){
+        if (file.isNull()) {
+            // return empty file
+            next(null, file);
+        } else {
+            lwip.open(file.path, function(err, image){
+                processFn(image, function(){
+                    image.toBuffer('jpg', function(err, buffer){
+                        file.contents = buffer;
+                        next(null, file);
+                    });
+                });
+            });
+        }
+    })
+};
 
-gulp.task('build:asset:image', function(){
+var createImageSizeContain = function(maxSize){
+    return createLwipStream(function(image, callback){
+        var width = image.width();
+        var height = image.height();
+
+        if (width <= maxSize && height <= maxSize) {
+            callback();
+        } else {
+            if ( width > height ){
+                image.resize(maxSize, (maxSize / width) * height, callback);
+            } else {
+                image.resize((maxSize / height) * width, maxSize, callback);
+            }
+        }
+    })
+}
+
+
+gulp.task('build:asset:image', ['build:asset:image:object'], function(){
+    return gulp.src([
+            './src/asset/image/**/*',
+            '!./src/asset/image/object/**/*'
+        ])
+        .pipe(createLwipStream(function(image, callback){
+            image.contain(86,86, callback)
+        }))
+        .pipe(gulp.dest('./build/asset/image'));
+});
+
+gulp.task('build:asset:image:object', [
+    'build:asset:image:object:thumbnail',
+    'build:asset:image:object:preview',
+    'build:asset:image:object:large'
+]);
+
+gulp.task('build:asset:image:object:thumbnail', function(){
     return gulp.src(['./src/asset/image/**/*'])
+        .pipe(createImageSizeContain(83))
+        .pipe($.rename({
+            suffix: "-thumbnail"
+        }))
+        .pipe(gulp.dest('./build/asset/image'));
+});
+
+gulp.task('build:asset:image:object:preview', function(){
+    return gulp.src(['./src/asset/image/**/*'])
+        .pipe(createImageSizeContain(1600))
+        .pipe($.rename({
+            suffix: "-preview"
+        }))
+        .pipe(gulp.dest('./build/asset/image'));
+});
+
+gulp.task('build:asset:image:object:large', function(){
+    return gulp.src(['./src/asset/image/**/*'])
+        .pipe(createImageSizeContain(4000))
+        .pipe($.rename({
+            suffix: "-large"
+        }))
         .pipe(gulp.dest('./build/asset/image'));
 });
 
