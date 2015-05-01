@@ -5,5 +5,8 @@ $fontStack-default: 'Open Sans', sans-serif;
 
 // breakpoints
 $breakpoints: (
+  'tiny': '(max-width: 486px)',
+  'small': '(max-width: 786px)',
+  'small-only': '(min-width: 486px) and (max-width: 786px)',
   'medium': '(max-width: 1024px)'
 );

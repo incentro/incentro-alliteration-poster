@@ -1,0 +1,46 @@
+.posterSettings {
+  border: 0;
+  padding: 10px;
+  color: $color-white;
+
+  &_label {
+    width: 100%;
+    display: inline-block;
+    padding-bottom: .5em;
+
+    @include breakpoint(small-only){
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
+
+  &_input {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 1em;
+
+    color: black;
+
+    @include breakpoint(small-only){
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
+
+  &_objectPicker {
+    height: 50vh;
+    min-height: 200px;
+    overflow-y: auto;
+  }
+
+  &_objectItem {
+    float: left;
+    width: 86px;
+    height: 86px;
+    margin: 0 10px 10px 0;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}

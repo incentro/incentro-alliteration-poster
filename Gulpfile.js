@@ -17,12 +17,13 @@ gulp.task('build:webroot', function(){
     var htmlFilter = $.filter('./src/webroot/**/*.html');
 
     return gulp.src(['./src/webroot/**/*'])
-        .pipe(htmlFilter).pipe($.swig({
-            defaults: {
-                cache: false
-            }
-        }))
-        .pipe(htmlFilter.restore())
+        //.pipe(htmlFilter)
+        //.pipe($.swig({
+        //    defaults: {
+        //        cache: false
+        //    }
+        //}))
+        //.pipe(htmlFilter.restore())
         .pipe(gulp.dest('./build'));
 });
 

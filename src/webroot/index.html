@@ -6,6 +6,32 @@
     <link rel="stylesheet" href="asset/css/site.css"/>
 </head>
 <body>
+    <main class="creatorLayout">
+        <aside class="creatorLayout_controls">
+            <fieldset class="posterSettings">
+                <label for="posterSettings_workWord" class="posterSettings_label">object</label>
+                <ul class="posterSettings_objectPicker">
+                    <li class="posterSettings_objectItem">
+                        <button type="button" class="posterSettings_object"></button>
+                    </li>
+                </ul>
+
+                <label for="posterSettings_workWord" class="posterSettings_label">work word</label>
+                <input type="text" id="posterSettings_workWord" class="posterSettings_input" rv-value="workWord"/>
+
+                <label for="posterSettings_playWord" class="posterSettings_label">play word</label>
+                <input type="text" id="posterSettings_playWord" class="posterSettings_input" rv-value="playWord"/>
+            </fieldset>
+
+            <fieldset class="posterExport">
+                <button type="button" class="posterExport_asPng">save as png</button>
+            </fieldset>
+        </aside>
+        <article class="creatorLayout_preview">
+            {workWord}
+            {playWord}
+        </article>
+    </main>
     <script src="asset/javascript/site.js"></script>
 </body>
 </html>
