@@ -84,6 +84,26 @@ class CanvasView {
 
         this.draw.size(posterWidth, posterHeight);
     }
+
+    download(){
+        var canvasElement = document.createElement('canvas');
+        canvasElement.width = '1500px';
+        canvasElement.height = '2000px';
+
+        canvg(canvasElement, this.element.innerHTML, {
+            forceRedraw: function(){
+                return true;
+            },
+            renderCallback: function(){
+                var downloadUrl = canvasElement.toDataURL('image/jpeg', 1);
+                var anchorELement = document.createElement('a');
+                anchorELement.setAttribute('download', encodeURIComponent(settingsData.workWord) + '-' + encodeURIComponent(settingsData.playWord) + '-' + encodeURIComponent(settingsData.activeObject.id) + '.jpg');
+                anchorELement.setAttribute('href', downloadUrl);
+                document.body.appendChild(anchorELement);
+                anchorELement.click();
+            }
+        });
+    }
 }
 
 module.exports = CanvasView;

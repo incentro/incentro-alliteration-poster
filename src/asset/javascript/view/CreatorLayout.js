@@ -12,6 +12,9 @@ class CreatorLayoutView {
             settings: settingsData,
             onPosterSelect : function(event, data){
                 this.data.settings.activeObject = data.object;
+            }.bind(this),
+            onDownloadClick : function(event, data){
+                this._canvasView.download();
             }.bind(this)
         };
 
