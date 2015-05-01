@@ -51,8 +51,14 @@ gulp.task('build:asset:javascript', function(){
 
 
 gulp.task('build:asset:scss', function(){
-    return $.rubySass('./src/asset/scss/site.scss')
-        .pipe(gulp.dest('./build/asset/css'));
+    return $.rubySass('./src/asset/scss/site.scss', {
+        loadPath: [
+            './src/asset/scss/',
+
+            // allows loading of bower_components
+            './bower_components/'
+        ]
+    }).pipe(gulp.dest('./build/asset/css'));
 });
 
 

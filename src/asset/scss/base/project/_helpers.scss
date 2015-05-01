@@ -1,0 +1,15 @@
+
+@include importOnce('project-helpers') {
+  // Contain floats: h5bp.com/q
+  @include _add(clearfix) {
+    &:before,
+    &:after {
+      content: " ";
+      display: table;
+    }
+    &:after {
+      clear: both;
+    }
+    *zoom: 1;
+  }
+}

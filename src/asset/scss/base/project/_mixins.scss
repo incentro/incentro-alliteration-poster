@@ -1,0 +1,17 @@
+@mixin textColor($color) {
+  @if lightness($color) <= 80 {
+    color: $color-white;
+  }
+}
+
+@mixin rgba($property, $color: black, $opacity: 1, $mixColor: white) {
+  #{$property}: mix($mixColor, $color, $opacity * 100%);
+
+  @if  $opacity != 1 {
+    #{$property}: rgba($color, $opacity);
+  }
+}
+
+@mixin forceHardwareRendering(){
+  -webkit-transform: translate3d(0, 0, 0);
+}
