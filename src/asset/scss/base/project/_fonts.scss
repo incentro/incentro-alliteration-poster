@@ -1,7 +1,0 @@
-
-@include importOnce('project-fonts') {
-  // Open Sans font, used as base font
-  @include importFont('Open Sans', 'open-sans/OpenSans-Light', 300, $woff2: true);
-}
-
-
