@@ -17,10 +17,10 @@
                 </ul>
 
                 <label for="posterSettings_workWord" class="posterSettings_label">work word</label>
-                <input type="text" id="posterSettings_workWord" class="posterSettings_input" rv-value="workWord"/>
+                <input type="text" id="posterSettings_workWord" class="posterSettings_input" rv-value="settings.workWord"/>
 
                 <label for="posterSettings_playWord" class="posterSettings_label">play word</label>
-                <input type="text" id="posterSettings_playWord" class="posterSettings_input" rv-value="playWord"/>
+                <input type="text" id="posterSettings_playWord" class="posterSettings_input" rv-value="settings.playWord"/>
             </fieldset>
 
             <fieldset class="posterExport">
@@ -28,9 +28,12 @@
             </fieldset>
         </aside>
         <article class="creatorLayout_preview">
-            {workWord}
-            {playWord}
-            {activeObject.id}
+            {settings.workWord}
+            {settings.playWord}
+            {settings.activeObject.id}
+            <div class="creatorLayout_previewCanvas">
+
+            </div>
         </article>
     </main>
     <script src="asset/javascript/site.js"></script>

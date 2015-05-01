@@ -1,17 +1,16 @@
 var rivets = require('rivets');
 var objectData = require('../data/objects');
+var settingsData = require('../data/settings');
 
 require('../binder/backgroundImage');
 
 class CreatorLayoutView {
     constructor(element) {
         this.data = {
-            playWord: 'plee',
-            workWord: 'wurk',
             objects: objectData,
-            activeObject: {},
+            settings: settingsData,
             onPosterSelect : function(event, data){
-                this.data.activeObject = data.object;
+                this.data.settings.activeObject = data.object;
             }.bind(this)
         };
 
@@ -19,7 +18,7 @@ class CreatorLayoutView {
     }
 
     set element(element) {
-        // destory rivets view when replacing element
+        // destroy rivets view when replacing element
         if ( this._rivetsView ){
             this._rivetsView.unbind();
         }
