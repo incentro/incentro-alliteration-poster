@@ -12,8 +12,8 @@ objectData.forEach(function(object){
 });
 
 var settings = {
-    playWord: getQueryParameter('play') || '',
-    workWord: getQueryParameter('work') || '',
+    playWord: getQueryParameter('play') || 'beers',
+    workWord: getQueryParameter('work') || 'bits',
     activeObject: activeObject
 };
 

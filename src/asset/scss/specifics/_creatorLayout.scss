@@ -18,6 +18,7 @@
     display: table-cell;
     width: 300px;
     background: $color-grey;
+    vertical-align: top;
 
     @include breakpoint(small){
       display: block;
@@ -28,10 +29,19 @@
   &_preview {
     display: table-cell;
     background: $color-grey-light;
+    position: relative;
+    vertical-align: top;
 
     @include breakpoint(small){
       display: block;
       width: 100%;
     }
+  }
+
+  &_previewCanvas {
+    background: white;
+    margin: 0 auto;
+    width: 75vh;
+    height: 100vh;
   }
 }
