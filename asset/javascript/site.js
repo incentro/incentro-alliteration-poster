@@ -2771,6 +2771,27 @@ var CanvasView = (function () {
 
             this.draw.size(posterWidth, posterHeight);
         }
+    }, {
+        key: 'download',
+        value: function download() {
+            var canvasElement = document.createElement('canvas');
+            canvasElement.width = '1500px';
+            canvasElement.height = '2000px';
+
+            canvg(canvasElement, this.element.innerHTML, {
+                forceRedraw: function forceRedraw() {
+                    return true;
+                },
+                renderCallback: function renderCallback() {
+                    var downloadUrl = canvasElement.toDataURL('image/jpeg', 1);
+                    var anchorELement = document.createElement('a');
+                    anchorELement.setAttribute('download', encodeURIComponent(settingsData.workWord) + '-' + encodeURIComponent(settingsData.playWord) + '-' + encodeURIComponent(settingsData.activeObject.id) + '.jpg');
+                    anchorELement.setAttribute('href', downloadUrl);
+                    document.body.appendChild(anchorELement);
+                    anchorELement.click();
+                }
+            });
+        }
     }]);
 
     return CanvasView;
@@ -2821,6 +2842,9 @@ var CreatorLayoutView = (function () {
             settings: settingsData,
             onPosterSelect: (function (event, data) {
                 this.data.settings.activeObject = data.object;
+            }).bind(this),
+            onDownloadClick: (function (event, data) {
+                this._canvasView.download();
             }).bind(this)
         };
 
